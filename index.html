@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasojadita Art Commissions</title>
+    <meta name="description" content="Personalized hand-drawn portraits, posters and keepsakes for Cebu City students and young adults.">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- gradient used by the neon step icons -->
+    <svg width="0" height="0" class="absolute" aria-hidden="true">
+        <defs>
+            <linearGradient id="neon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ec4899"/>
+                <stop offset="50%" stop-color="#a855f7"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- ===================== HERO ===================== -->
+    <div class="hero-bg px-6 md:px-16 lg:px-24 pt-6 pb-20">
+        <header class="flex items-center justify-between py-3 mb-10 relative z-10">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="assets/logo.svg" alt="Rasojadita purple cat logo" class="h-10 w-10">
+                <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Rasojadita<span class="text-sm font-medium text-fuchsia-200 ml-1 hidden sm:inline">Art Commissions</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-7">
+                <a href="#what-we-do" class="nav-link">What We Do</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#custom-request" class="nav-link">Custom Request</a>
+                <div id="nav-auth" class="flex items-center gap-4">
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="register.html" class="btn-glow px-5 py-2 text-sm">Sign Up</a>
+                </div>
+            </nav>
+
+            <button id="mobile-menu-btn" type="button" class="md:hidden p-2 text-white" aria-label="Open menu">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </header>
+
+        <!-- mobile dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden mb-6 p-4 bg-white rounded-2xl shadow-xl flex flex-col gap-2 relative z-10">
+            <a href="#what-we-do" class="nav-link-dark py-1">What We Do</a>
+            <a href="#products" class="nav-link-dark py-1">Products</a>
+            <a href="#gallery" class="nav-link-dark py-1">Gallery</a>
+            <a href="#custom-request" class="nav-link-dark py-1">Custom Request</a>
+            <div id="mobile-auth" class="flex flex-col gap-2 pt-2 border-t border-violet-100">
+                <a href="login.html" class="nav-link-dark py-1">Login</a>
+                <a href="register.html" class="nav-link-dark py-1">Sign Up</a>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10 items-center relative z-10 max-w-6xl mx-auto lg:mx-0">
+            <main>
+                <p class="inline-block text-xs font-bold tracking-widest uppercase text-fuchsia-200 bg-white/10 border border-white/20 rounded-full px-3 py-1 mb-4">Cebu City &bull; Hand-drawn &bull; Student-friendly</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
+                    Art made <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-violet-300">for you</span>,<br>drawn by hand.
+                </h1>
+                <p class="text-base sm:text-lg text-violet-100 mb-8 leading-relaxed max-w-lg">
+                    Personalized portraits, posters and keepsakes with student-friendly prices, free inclusions and direct chat with the artist.
+                </p>
+
+                <div class="max-w-md">
+                    <div class="flex items-center bg-white rounded-full p-1.5 search-box">
+                        <input id="search-input" type="text" autocomplete="off"
+                               placeholder="Search artwork: portrait, poster, keychain..."
+                               class="w-full px-5 py-2.5 text-sm sm:text-base text-slate-800 bg-transparent rounded-full focus:outline-none placeholder-slate-400">
+                        <button id="search-btn" type="button" class="btn-glow px-6 py-2.5 text-xs sm:text-sm tracking-wider uppercase shrink-0">Search</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <button type="button" class="search-chip" data-query="portrait">Portraits</button>
+                        <button type="button" class="search-chip" data-query="poster">Poster</button>
+                        <button type="button" class="search-chip" data-query="keychain">Keychain</button>
+                        <button type="button" class="search-chip" data-query="gift">Gifts</button>
+                    </div>
+                    <p id="search-summary" class="text-sm text-violet-100 mt-3 min-h-[1.25rem]"></p>
+                </div>
+            </main>
+
+            <div class="hidden lg:flex justify-center">
+                <img src="assets/logo.svg" alt="" class="w-72 h-72 logo-glow">
+            </div>
+        </div>
+    </div>
+
+    <p id="app-loading" class="text-center text-xs text-violet-500 bg-violet-50 py-1">Loading interactive features...</p>
+
+    <!-- ===================== WHAT WE DO ===================== -->
+    <section id="what-we-do" class="py-16 px-6 md:px-16 lg:px-24 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">What we do</h2>
+            <p class="text-center text-slate-600 max-w-2xl mx-auto mb-10">Rasojadita Art Commissions makes personalized physical artwork by hand, so a portrait, gift or keepsake feels made just for you.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="card p-5"><div class="text-3xl mb-2">&#9999;&#65039;</div><h3 class="font-bold text-violet-800 mb-1">Hand-drawn &amp; physical</h3><p class="text-sm text-slate-600">Real artwork you can hold, frame and gift, not just a digital file.</p></div>
+                <div class="card p-5"><div class="text-3xl mb-2">&#127891;</div><h3 class="font-bold text-violet-800 mb-1">Student-friendly</h3><p class="text-sm text-slate-600">Affordable prices and a student discount for Cebu City students and young adults.</p></div>
+                <div class="card p-5"><div class="text-3xl mb-2">&#127873;</div><h3 class="font-bold text-violet-800 mb-1">Free inclusions</h3><p class="text-sm text-slate-600">Portraits come with a free frame, eye keychain and a special paper bag.</p></div>
+                <div class="card p-5"><div class="text-3xl mb-2">&#128172;</div><h3 class="font-bold text-violet-800 mb-1">Personal service</h3><p class="text-sm text-slate-600">Talk to the artist directly on Messenger and adjust your request before drawing starts.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STUDENT DISCOUNT ===================== -->
+    <section id="student-discount" class="px-6 md:px-16 lg:px-24 pb-16 bg-white">
+        <div class="max-w-6xl mx-auto rounded-3xl p-8 sm:p-10 text-white flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+             style="background: linear-gradient(120deg,#7c3aed,#db2777); box-shadow: 0 20px 45px -15px rgba(168,85,247,.6);">
+            <div>
+                <p class="text-xs font-bold tracking-widest uppercase text-pink-100 mb-1">Student discount</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Studying? You get a discount.</h2>
+                <p class="text-pink-50 max-w-xl">Rasojadita is built for students. Tick the student box in the request form below and the artist will apply your discount when you agree on the price.</p>
+            </div>
+            <button id="student-cta" type="button" class="shrink-0 bg-white text-violet-700 font-bold rounded-full px-7 py-3 hover:bg-violet-50 transition">Claim my discount</button>
+        </div>
+    </section>
+
+    <!-- ===================== PRODUCTS ===================== -->
+    <section id="products" class="py-16 px-6 md:px-16 lg:px-24 page-bg">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">Take a look at our products</h2>
+            <p class="text-center text-slate-600 mb-10">Pick a package or send a custom request. Prices are in Philippine pesos.</p>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="product-card card p-6 flex flex-col" data-keywords="solo portrait person self gift frame keychain paper bag">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128100;</span><span class="price-tag">&#8369;500</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Solo portrait</h3>
+                    <ul class="text-sm text-slate-600 mt-2 mb-5 space-y-1 flex-1"><li>&#10003; Free frame</li><li>&#10003; Free eye keychain</li><li>&#10003; Special paper bag</li></ul>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Solo portrait">Request this</button>
+                </article>
+
+                <article class="product-card card p-6 flex flex-col" data-keywords="couple portrait partner anniversary gift frame keychain paper bag">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128145;</span><span class="price-tag">&#8369;800</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Couple portrait</h3>
+                    <ul class="text-sm text-slate-600 mt-2 mb-5 space-y-1 flex-1"><li>&#10003; &#8369;200 discount included</li><li>&#10003; Free frame</li><li>&#10003; 2 eye keychains</li><li>&#10003; Special paper bag</li></ul>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Couple portrait">Request this</button>
+                </article>
+
+                <article class="product-card card p-6 flex flex-col" data-keywords="poster print decoration wall">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128444;&#65039;</span><span class="price-tag">from &#8369;150</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Poster</h3>
+                    <p class="text-sm text-slate-600 mt-2 mb-5 flex-1">Custom poster artwork for your room, org or event. Final price depends on the request.</p>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Poster">Request this</button>
+                </article>
+
+                <article class="product-card card p-6 flex flex-col" data-keywords="slogan quote text lettering words">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128172;</span><span class="price-tag">&#8369;150</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Slogan</h3>
+                    <p class="text-sm text-slate-600 mt-2 mb-5 flex-1">Your favorite quote or class slogan, hand-lettered and drawn.</p>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Slogan">Request this</button>
+                </article>
+
+                <article class="product-card card p-6 flex flex-col" data-keywords="eye keychain accessory small gift">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128065;&#65039;</span><span class="price-tag">&#8369;70 each</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Eye keychain</h3>
+                    <p class="text-sm text-slate-600 mt-2 mb-5 flex-1">A tiny drawn eye keychain. Free with portraits, or add extras anytime.</p>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Eye keychain">Request this</button>
+                </article>
+
+                <article class="product-card card p-6 flex flex-col" data-keywords="family group portrait custom quote gift">
+                    <div class="flex items-center justify-between mb-3"><span class="text-4xl">&#128106;</span><span class="price-tag">Ask us</span></div>
+                    <h3 class="text-lg font-bold text-violet-900">Family / group portrait</h3>
+                    <p class="text-sm text-slate-600 mt-2 mb-5 flex-1">Need more than two people? Send a request and the artist will quote a price.</p>
+                    <button type="button" class="request-btn btn-glow py-2.5 text-sm" data-product="Family/group portrait">Request a quote</button>
+                </article>
+            </div>
+
+            <div id="no-results" class="hidden mt-8 text-center card p-8 max-w-md mx-auto">
+                <p class="font-semibold text-violet-900 mb-1">No products match "<span id="no-results-query"></span>"</p>
+                <p class="text-sm text-slate-600 mb-4">Try another word, or send a custom request below.</p>
+                <button id="clear-search" type="button" class="btn-ghost px-5 py-2 text-sm">Show all products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section id="how-it-works" class="py-16 px-6 md:px-16 lg:px-24 bg-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">How it works</h2>
+            <p class="text-slate-600 mb-12">From first message to finished artwork in six steps.</p>
+            <div class="grid grid-cols-2 lg:grid-cols-6 gap-8">
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4-4 7-9 7a10 10 0 01-4-.8L3 20l1.3-3.5C3.5 15.3 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">1. Message us</p>
+                    <p class="text-xs text-slate-500 mt-1">Send a reference photo or describe your idea.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">2. Agree on details</p>
+                    <p class="text-xs text-slate-500 mt-1">Type, style, colors, deadline, price and revisions.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.7 0-3 .9-3 2s1.3 2 3 2 3 .9 3 2-1.3 2-3 2m0-8V7m0 10v-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">3. 50% down payment</p>
+                    <p class="text-xs text-slate-500 mt-1">Secures your commission slot.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.2 5.8l3 3M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">4. We draw</p>
+                    <p class="text-xs text-slate-500 mt-1">Hand-drawn with progress updates.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">5. Final payment</p>
+                    <p class="text-xs text-slate-500 mt-1">Pay the balance once it is finished.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="neon-step-circle w-24 h-24 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 gradient-icon" fill="none" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zm0 0h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z"/></svg>
+                    </div>
+                    <p class="font-bold text-violet-900 text-sm">6. Receive it</p>
+                    <p class="text-xs text-slate-500 mt-1">Pickup, meet-up or delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROMO VIDEO SLOT =====================
+         Reserved for the 30-second promotional video.
+         When the video is ready, replace the .video-placeholder div with ONE of:
+           <video src="assets/promo.mp4" controls playsinline poster="assets/promo-poster.jpg"></video>
+           <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    -->
+    <section id="promo-video" class="py-16 px-6 md:px-16 lg:px-24 page-bg">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Meet Rasojadita in 30 seconds</h2>
+            <p class="text-slate-600 mb-8">A quick look at the art, the artist and how to order.</p>
+            <div class="video-frame">
+                <div class="video-placeholder">
+                    <img src="assets/logo.svg" alt="" class="w-16 h-16 mb-3 opacity-90">
+                    <p class="font-bold text-lg">Promo video coming soon</p>
+                    <p class="text-sm text-violet-200">16:9 &bull; 30 seconds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section id="gallery" class="py-16 px-6 md:px-16 lg:px-24 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">Gallery of sample works</h2>
+            <p class="text-center text-slate-600 mb-10">Tap a piece to view it larger.</p>
+            <!-- To use real photos: save them in assets/gallery/ and change data-src and the <img src> below. -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-1.svg" data-caption="Solo portrait"><img src="assets/gallery/sample-1.svg" alt="Sample solo portrait" loading="lazy"></button>
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-2.svg" data-caption="Couple portrait"><img src="assets/gallery/sample-2.svg" alt="Sample couple portrait" loading="lazy"></button>
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-3.svg" data-caption="Poster"><img src="assets/gallery/sample-3.svg" alt="Sample poster" loading="lazy"></button>
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-4.svg" data-caption="Slogan art"><img src="assets/gallery/sample-4.svg" alt="Sample slogan artwork" loading="lazy"></button>
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-5.svg" data-caption="Eye keychain"><img src="assets/gallery/sample-5.svg" alt="Sample eye keychain" loading="lazy"></button>
+                <button type="button" class="gallery-item aspect-[4/5]" data-src="assets/gallery/sample-6.svg" data-caption="Framed portrait"><img src="assets/gallery/sample-6.svg" alt="Sample framed portrait" loading="lazy"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== WHY RASOJADITA ===================== -->
+    <section id="why" class="py-12 px-6 md:px-16 lg:px-24 bg-violet-950 text-white">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div><p class="text-2xl mb-1">&#128396;&#65039;</p><p class="font-bold">Physical &amp; hand-drawn</p></div>
+            <div><p class="text-2xl mb-1">&#128184;</p><p class="font-bold">Student-friendly prices</p></div>
+            <div><p class="text-2xl mb-1">&#127873;</p><p class="font-bold">Free frame, keychain &amp; bag</p></div>
+            <div><p class="text-2xl mb-1">&#128172;</p><p class="font-bold">Chat with the artist</p></div>
+        </div>
+    </section>
+
+    <!-- ===================== CUSTOM COMMISSION ===================== -->
+    <section id="custom-request" class="py-16 px-6 md:px-16 lg:px-24 page-bg">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">Send a custom commission request</h2>
+            <p class="text-center text-slate-600 mb-8">Tell the artist what you have in mind. A 50% down payment confirms your slot once details are agreed.</p>
+
+            <form id="commission-form" class="card p-6 sm:p-8 space-y-4" onsubmit="return false;" novalidate>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="label" for="cr-name">Your name</label>
+                        <input id="cr-name" type="text" class="field" autocomplete="name" placeholder="Juan Dela Cruz">
+                        <p id="cr-name-error" class="field-error"></p>
+                    </div>
+                    <div>
+                        <label class="label" for="cr-email">Email</label>
+                        <input id="cr-email" type="email" class="field" autocomplete="email" placeholder="you@email.com">
+                        <p id="cr-email-error" class="field-error"></p>
+                    </div>
+                </div>
+                <div>
+                    <label class="label" for="cr-product">What would you like drawn?</label>
+                    <select id="cr-product" class="field">
+                        <option value="">Choose one...</option>
+                        <option>Solo portrait</option>
+                        <option>Couple portrait</option>
+                        <option>Family/group portrait</option>
+                        <option>Poster</option>
+                        <option>Slogan</option>
+                        <option>Eye keychain</option>
+                        <option>Other custom request</option>
+                    </select>
+                    <p id="cr-product-error" class="field-error"></p>
+                </div>
+                <div>
+                    <div class="flex justify-between items-end">
+                        <label class="label" for="cr-message">Your message</label>
+                        <span id="cr-counter" class="text-xs text-slate-400 mb-1">0/500</span>
+                    </div>
+                    <textarea id="cr-message" rows="5" class="field" placeholder="Describe your idea: who or what to draw, style, colors, deadline, and any reference photo link."></textarea>
+                    <p id="cr-message-error" class="field-error"></p>
+                </div>
+                <label class="flex items-center gap-2 text-sm text-slate-700">
+                    <input id="cr-student" type="checkbox" class="w-4 h-4 accent-purple-600">
+                    I am a student (apply the student discount)
+                </label>
+                <div id="cr-status" class="hidden"></div>
+                <button type="submit" class="btn-glow w-full py-3">Send request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="bg-white border-t border-violet-100 py-10 px-6 text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+            <img src="assets/logo.svg" alt="" class="w-8 h-8">
+            <span class="font-extrabold text-violet-900">Rasojadita Art Commissions</span>
+        </div>
+        <p class="text-sm text-slate-600 max-w-md mx-auto">Personalized hand-drawn artwork in Cebu City. Orders are discussed through Facebook Messenger.</p>
+        <p class="text-xs text-slate-400 mt-4">&copy; <span id="year">2026</span> Rasojadita Art Commissions &bull; BSIT-3 Section 11 project</p>
+    </footer>
+
+    <!-- lightbox for gallery -->
+    <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Artwork preview">
+        <div class="text-center">
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption" class="text-white font-semibold mt-3"></p>
+            <p class="text-violet-200 text-xs mt-1">Click anywhere or press Esc to close</p>
+        </div>
+    </div>
+
+    <!-- layout-only helper: the mobile menu works before PyScript finishes loading -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function () { document.getElementById('mobile-menu').classList.add('hidden'); });
+        });
+    </script>
+
+    <script type="py" src="py/landing.py" config="pyscript.toml"></script>
+</body>
+</html>

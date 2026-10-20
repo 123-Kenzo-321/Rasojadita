@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Rasojadita Art Commissions</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-bg min-h-screen flex flex-col">
+
+    <header class="hero-bg px-5 sm:px-10 py-4">
+        <div class="flex items-center justify-between max-w-6xl mx-auto relative z-10">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="assets/logo.svg" alt="Rasojadita purple cat logo" class="h-9 w-9">
+                <span class="text-lg sm:text-xl font-extrabold text-white">Rasojadita</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="nav-link">Home</a>
+                <div id="nav-auth" class="flex items-center gap-3"></div>
+            </div>
+        </div>
+        <div id="mobile-auth" class="hidden"></div>
+    </header>
+
+    <p id="app-loading" class="text-center text-xs text-violet-500 bg-violet-50 py-1">Loading your account...</p>
+
+    <main class="flex-1 px-4 sm:px-8 py-10">
+        <div class="max-w-4xl mx-auto space-y-6">
+
+            <div class="card p-6 sm:p-8">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                    <h1 class="text-2xl font-extrabold text-violet-900">Hello, <span id="acc-welcome"></span>!</h1>
+                    <span id="acc-role" class="badge badge-customer"></span>
+                </div>
+                <dl class="grid sm:grid-cols-2 gap-4 text-sm">
+                    <div><dt class="text-slate-400 text-xs uppercase tracking-wide">Full name</dt><dd id="acc-fullname" class="font-semibold"></dd></div>
+                    <div><dt class="text-slate-400 text-xs uppercase tracking-wide">Username</dt><dd id="acc-username" class="font-semibold"></dd></div>
+                    <div><dt class="text-slate-400 text-xs uppercase tracking-wide">Email</dt><dd id="acc-email" class="font-semibold break-all"></dd></div>
+                    <div><dt class="text-slate-400 text-xs uppercase tracking-wide">Member since</dt><dd id="acc-since" class="font-semibold"></dd></div>
+                </dl>
+                <button id="logout-main" type="button" class="btn-ghost px-6 py-2 text-sm mt-6">Log out</button>
+            </div>
+
+            <!-- customer view -->
+            <div id="customer-panel" class="hidden space-y-6">
+                <div class="card p-6 sm:p-8">
+                    <h2 class="text-lg font-bold text-violet-900 mb-3">My commission requests</h2>
+                    <div id="my-requests"></div>
+                    <a href="index.html#custom-request" class="btn-glow inline-block px-6 py-2.5 text-sm mt-3">Send a new request</a>
+                </div>
+                <div class="alert alert-info">Order placement and tracking are coming in the next stage of this website.</div>
+            </div>
+
+            <!-- artist / admin view -->
+            <div id="admin-panel" class="hidden space-y-6">
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="card p-4"><p id="stat-users" class="text-2xl font-extrabold text-violet-700">0</p><p class="text-xs text-slate-500">Users</p></div>
+                    <div class="card p-4"><p id="stat-messages" class="text-2xl font-extrabold text-violet-700">0</p><p class="text-xs text-slate-500">Requests</p></div>
+                    <div class="card p-4"><p id="stat-new" class="text-2xl font-extrabold text-pink-600">0</p><p class="text-xs text-slate-500">New</p></div>
+                </div>
+                <div class="card p-6 sm:p-8">
+                    <h2 class="text-lg font-bold text-violet-900 mb-3">Commission requests inbox</h2>
+                    <div id="messages-list"></div>
+                </div>
+                <div class="card p-6 sm:p-8">
+                    <h2 class="text-lg font-bold text-violet-900 mb-3">Registered users</h2>
+                    <div class="table-wrap">
+                        <table class="simple">
+                            <thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th></tr></thead>
+                            <tbody id="users-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center text-xs text-slate-400 py-6">&copy; <span id="year">2026</span> Rasojadita Art Commissions</footer>
+
+    <script type="py" src="py/account.py" config="pyscript.toml"></script>
+</body>
+</html>

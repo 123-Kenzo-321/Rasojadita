@@ -1,0 +1,7 @@
+# PyScript configuration shared by every page.
+# Each Python module is fetched from the server and placed next to the page
+# script so pages can simply `import db`, `import auth`, `import ui`.
+[files]
+"./py/db.py" = "./db.py"
+"./py/auth.py" = "./auth.py"
+"./py/ui.py" = "./ui.py"

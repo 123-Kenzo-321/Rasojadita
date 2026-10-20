@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+  <rect width="400" height="500" fill="url(#g)"/>
+  <circle cx="150" cy="215" r="50" fill="#fff" opacity=".85"/><circle cx="255" cy="215" r="50" fill="#fff" opacity=".7"/><path d="M50 400 Q150 290 215 400 Z" fill="#fff" opacity=".85"/><path d="M190 400 Q255 290 355 400 Z" fill="#fff" opacity=".7"/>
+  <text x="200" y="448" font-family="Arial,sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#fff">Couple portrait</text>
+  <text x="200" y="476" font-family="Arial,sans-serif" font-size="14" text-anchor="middle" fill="#fff" opacity=".8">placeholder - replace with real work</text>
+</svg>
