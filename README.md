@@ -10,7 +10,7 @@ PyScript must load its Python files over HTTP, so do not double-click `index.htm
 
 ```
 python -m http.server 8000
-```
+```' 
 
 Then open <http://localhost:8000>. An internet connection is needed (Tailwind, PyScript and the font load from CDNs). The first load takes a few seconds while PyScript starts.
 
