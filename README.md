@@ -39,7 +39,7 @@ Passwords are salted and hashed before storing, but this is a client-side demo, 
 index.html  login.html  register.html  account.html   pages
 pyscript.toml                                          loads the .py modules
 css/style.css                                          shared styles
-assets/logo.svg                                        purple cat logo
+assets/logo3.svg                                        purple cat logo
 assets/gallery/sample-*.svg                            placeholder sample works
 py/db.py        local database (localStorage)
 py/auth.py      register / login / session / validation (no DOM code)
